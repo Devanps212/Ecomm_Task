@@ -1,0 +1,51 @@
+.banner {
+    background-color: rgba(173, 216, 230, 0.8);
+    padding: 20px;
+    text-align: center;
+    min-height: calc(100vh - 71px);
+    overflow-x: hidden;
+}
+
+
+.banner-img {
+    max-height: 400px;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.right-slide{
+    animation: slide-right 1.0s forwards;
+}
+
+.left-slide{
+    animation: slide-left 1.0s forwards;
+}
+
+@keyframes slide-right{
+    from{
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+@keyframes slide-left{
+    from{
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (min-width: 768px) {
+    .banner-img {
+        max-height: 500px;
+    }
+}
