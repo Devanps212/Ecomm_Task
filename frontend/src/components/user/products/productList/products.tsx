@@ -16,7 +16,7 @@ const Products = () => {
 
     return (
         <>
-            <div className="container-fluid vh-100 p-5" style={{marginTop:"75px"}}>
+            <div className="container" style={{marginTop:"105px"}}>
                 <div className="d-flex justify-content-center align-items-center">
                     <div className="row w-100">
                         <div className="col-md-3 col-12 d-none d-md-block">
