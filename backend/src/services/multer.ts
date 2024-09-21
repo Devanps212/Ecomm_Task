@@ -13,7 +13,7 @@ const storage = new CloudinaryStorage({
             folder: folder,
             public_id: public_id,
             transformation: [
-                { width: 500, height: 500, crop: 'fill', quality: 'auto' }, // Change 'limit' to 'fill'
+                { width: 500, height: 500, crop: 'fill', quality: 'auto' },
             ],
         };
     },
