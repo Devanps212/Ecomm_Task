@@ -1,8 +1,14 @@
 import { ErrorMessage, Field, Formik, FormikHelpers } from "formik";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import * as Yup from 'yup';
+import { useNavigate } from "react-router-dom";
+import { signUp } from "../../../features/api/user";
+import { toast } from "react-toastify";
 
 const Signup = () => {
+
+    const navigate = useNavigate()
+
     const validationSchema = Yup.object({
         username: Yup.string()
             .required("Username is required"),
@@ -14,27 +20,21 @@ const Signup = () => {
             .required("Password is required"),
     });
 
-    const handleSubmit = async (values: { username: string; email: string; password: string }, { setSubmitting, setErrors }: FormikHelpers<{ username: string; email: string; password: string }>) => {
+    const handleSubmit = async (values: { username: string; email: string; password: string }, { setSubmitting }: FormikHelpers<{ username: string; email: string; password: string }>) => {
         try {
-            const response = await fetch('/api/signup', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(values),
-            });
+            const response = await signUp(values.username, values.email, values.password)
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                setErrors({ email: errorData.message });
-                throw new Error('Signup failed');
+            if(response){
+                toast.success(response.message, {
+                    onClose: ()=>{
+                        navigate('/login')
+                    }
+                })
             }
-
-            const data = await response.json();
-            console.log('Signup successful:', data);
 
         } catch (error) {
             console.error('Signup error:', error);
+            toast.error(String(error))
             
         } finally {
             setSubmitting(false); 

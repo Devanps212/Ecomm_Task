@@ -2,7 +2,7 @@ import './banner.css';
 
 const Banner = () => {
     return (
-        <div className="container-fluid p-0" style={{ marginTop: "71px"}}>
+        <div className="container-fluid p-0">
             <div className="banner d-flex align-items-center">
                 <div className="row w-100">
                     <div className="col-md-6 col-12 text-center text-md-start right-slide">

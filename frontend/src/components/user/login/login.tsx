@@ -1,8 +1,17 @@
 import { ErrorMessage, Field, Formik, FormikHelpers } from "formik";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../../features/redux/slices/userToken/token";
+import { useNavigate } from "react-router-dom";
 import * as Yup from 'yup'
+import { login } from "../../../features/api/user";
+import { toast } from "react-toastify";
 
 const Login = () => {
+    
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
     const validationSchema = Yup.object({
         email: Yup.string()
             .email("Please enter a valid email")
@@ -12,30 +21,24 @@ const Login = () => {
             .required("Password is required"),
     });
 
-    const handleSubmit = async (values:{email:string, password: string}, { setSubmitting, setErrors }: FormikHelpers<{ email: string; password: string }>) => {
+
+    const handleSubmit = async (values:{email:string, password: string}, { setSubmitting}: FormikHelpers<{ email: string; password: string }>) => {
         try {
             
-            const response = await fetch('/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(values),
-            });
+            const response = await login(values.email, values.password)
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                setErrors({ email: errorData.message });
-                throw new Error('Login failed');
+            if(response){
+                dispatch(setToken(response.token))
+                toast.success(response.message, {
+                    onClose: ()=>{
+                        navigate('/')
+                    }
+                }) 
             }
 
-            const data = await response.json();
-            console.log('Login successful:', data);
-
-        } catch (error) {
-            console.error('Login error:', error);
-            
-        } finally {
+        } catch(error:unknown){
+            toast.error(String(error))
+        }finally {
             setSubmitting(false); 
         }
     };

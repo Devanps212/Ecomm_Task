@@ -17,7 +17,7 @@ const Cart = () => {
     const totalAmount = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
     return (
-        <div className="container-fluid" style={{ marginTop: "100px" }}>
+        <div className="container-fluid mt-5">
             <div className="row">
                 <h3>Shopping Cart</h3>
                 <div className="col-md-8 col-12 cart-items">
