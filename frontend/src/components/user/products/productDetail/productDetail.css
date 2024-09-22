@@ -1,0 +1,41 @@
+.product-image-gallery {
+    position: relative;
+}
+
+.main-image {
+    transition: transform 0.2s;
+}
+
+.thumbnail-wrapper {
+    overflow-x: auto;
+}
+
+.thumbnail {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.thumbnail:hover {
+    transform: scale(1.1);
+}
+
+.color-swatch {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: border 0.2s;
+}
+
+.product-details {
+    padding-left: 20px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+}
+
+.btn i {
+    margin-right: 5px;
+}

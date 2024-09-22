@@ -17,20 +17,10 @@ const schema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    size:{
-        type: [String],
-        required:true
-    },
-    colour:{
+    images: {
         type: [String],
         required: true
     },
-    images: [
-        {
-            public_id: { type: String, required: true },
-            url: { type: String, required: true },
-        }
-    ],
 },{timestamps:true})
 
 const productModel = mongoose.model("Product", schema)

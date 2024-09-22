@@ -1,4 +1,4 @@
-import './navbar.css'
+import './navbar.css';
 import { FaPersonDress } from "react-icons/fa6";
 import { useSelector, useDispatch } from "react-redux";
 import { jwtDecode } from "jwt-decode";
@@ -30,7 +30,7 @@ const Nav = () => {
     }
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light shadow">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">
             <div className="container">
                 <Link to="/" className="navbar-brand d-flex align-items-center">
                     <FaPersonDress className="fs-2 rounded-circle border border-dark me-2" />

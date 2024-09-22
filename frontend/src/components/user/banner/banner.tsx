@@ -18,6 +18,7 @@ const Banner = () => {
                             At EMAX, we bring you the latest trends in fashion, offering a wide range of clothing for every style and occasion. 
                             Our user-friendly platform makes shopping easy and enjoyable, providing high-quality garments that cater to all tastes. 
                         </p>
+                        <a href='/products' className='btn btn-primary w-25'>Shop now</a>
                     </div>
                 </div>
             </div>
