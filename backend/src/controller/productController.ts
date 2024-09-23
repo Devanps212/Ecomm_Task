@@ -1,10 +1,17 @@
 import productModel from '../models/retailerModel'
 import expressAsyncHandler from 'express-async-handler'
 import { Request, Response } from 'express'
+import { validationResult } from 'express-validator';
 
 
 const productAdd = expressAsyncHandler(
     async(req: Request, res: Response)=>{
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(400).json({ errors: errors.array() });
+            return
+        }
         const { name, description, price, stock} = req.body
         
         const product = await productModel.findOne({name})
@@ -46,6 +53,13 @@ const productAdd = expressAsyncHandler(
 
 const editProduct = expressAsyncHandler(
     async (req: Request, res: Response) => {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(400).json({ errors: errors.array() });
+            return
+        }
+
         const { _id, name, description, price, stock, imagesToDelete } = req.body;
 
         const product = await productModel.findById(_id);

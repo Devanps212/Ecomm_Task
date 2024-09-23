@@ -4,10 +4,18 @@ import userModel from '../models/userModel'
 import bcrypt from 'bcrypt'
 import { userInterface } from '../interfaces/userInterface'
 import jwt from 'jsonwebtoken'
+import { validationResult } from 'express-validator'
 
 
 const userLogin = expressAsyncHandler(
     async(req: Request, res: Response)=>{
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(400).json({errors: errors.array()});
+            return
+        }
+
         const {email, password} = req.body
 
         console.log(email, password)
@@ -35,9 +43,16 @@ const userLogin = expressAsyncHandler(
 
 const userSignUp = expressAsyncHandler(
     async(req: Request, res: Response)=>{
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            res.status(400).json({ errors: errors.array() });
+            return
+        }
+
         const { name, email, password } = req.body
 
-        const user = await userModel.findOne({name})
+        const user = await userModel.findOne({email})
 
         if(user){
             res.status(409).json({message:"user already exists"})
