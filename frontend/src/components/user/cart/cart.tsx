@@ -126,7 +126,6 @@ const Cart = () => {
                                     <span>Total Amount:</span>
                                     <span>₹{items.reduce((total, item) => total + item.price * item.quantity!, 0).toFixed(2)}</span>
                                 </h5>
-                                <button className="btn btn-primary w-100 mt-3">Proceed to Checkout</button>
                             </div>
                         </div>
                         </>

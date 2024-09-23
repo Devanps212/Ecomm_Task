@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Formik, FormikHelpers } from "formik";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import * as Yup from 'yup';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signUp } from "../../../features/api/user";
 import { toast } from "react-toastify";
 
@@ -96,6 +96,7 @@ const Signup = () => {
                             </Form>
                         )}
                     </Formik>
+                    <p className="mt-3">Already have an account  <Link to={'/login'}>Login</Link></p>
                 </div>
             </div>
         </div>

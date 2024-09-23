@@ -2,7 +2,7 @@ import { ErrorMessage, Field, Formik, FormikHelpers } from "formik";
 import { Button, FloatingLabel, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { setToken } from "../../../features/redux/slices/userToken/token";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from 'yup'
 import { login } from "../../../features/api/user";
 import { toast } from "react-toastify";
@@ -79,6 +79,7 @@ const Login = () => {
                             </Form>
                         )}
                     </Formik>
+                     <p className="mt-3">Don't have an account  <Link to={'/signUp'}>SignUp</Link></p>
                 </div>
             </div>
         </div>
