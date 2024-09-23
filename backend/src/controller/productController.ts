@@ -5,7 +5,6 @@ import { Request, Response } from 'express'
 
 const productAdd = expressAsyncHandler(
     async(req: Request, res: Response)=>{
-        console.log("reached")
         const { name, description, price, stock} = req.body
         
         const product = await productModel.findOne({name})
@@ -23,7 +22,6 @@ const productAdd = expressAsyncHandler(
             } else if (Array.isArray(files)) {
                 imagesPaths = files.map((file) => file.path);
             } else {
-                console.log("reached")
                 console.error("Files is not an array");
             }
 
@@ -48,7 +46,6 @@ const productAdd = expressAsyncHandler(
 
 const editProduct = expressAsyncHandler(
     async (req: Request, res: Response) => {
-        console.log("Reached controller for update");
         const { _id, name, description, price, stock, imagesToDelete } = req.body;
 
         const product = await productModel.findById(_id);
@@ -70,21 +67,17 @@ const editProduct = expressAsyncHandler(
             newImages = files.map(file => file.path);
         }
 
-        const imagesToDeleteArray = Array.isArray(imagesToDelete) ? imagesToDelete : [];
-        console.log("Images before deletion:", product.images);
-        console.log("Images to delete:", imagesToDeleteArray);
+        const imagesToDeleteArray = Array.isArray(imagesToDelete) ? imagesToDelete : []
 
-        product.images = product.images.filter(img => !imagesToDeleteArray.includes(img));
-        console.log("Images after deletion:", product.images);
+        product.images = product.images.filter(img => !imagesToDeleteArray.includes(img))
 
-        product.images.push(...newImages);
+        product.images.push(...newImages)
 
         try {
             const savedProduct = await product.save();
-            res.status(200).json({ message: "Updated successfully", product: savedProduct });
+            res.status(200).json({ message: "Updated successfully", product: savedProduct })
         } catch (error) {
-            console.error("Error saving product:", error);
-            res.status(500).json({ error: "Internal server error while saving product" });
+            res.status(500).json({ error: "Internal server error while saving product" })
         }
     }
 );
@@ -94,8 +87,6 @@ const editProduct = expressAsyncHandler(
 const deleteProduct = expressAsyncHandler(
     async(req: Request, res: Response)=>{
         const { _id } = req.params
-
-        console.log(_id)
 
         const product = await productModel.findOneAndDelete({_id:_id})
 
@@ -111,7 +102,6 @@ const deleteProduct = expressAsyncHandler(
 const allProducts = expressAsyncHandler(
     async(req:Request, res:Response)=>{
         const products =await productModel.find()
-        console.log(products)
 
         if(products.length > 0){
             res.status(200).json({message:"success", products})
@@ -125,8 +115,6 @@ const allProducts = expressAsyncHandler(
 const oneProduct = expressAsyncHandler(
     async(req: Request, res: Response)=>{
         const {id} = req.params
-
-        console.log(id)
 
         const product = await productModel.findOne({_id: id})
         

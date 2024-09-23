@@ -37,9 +37,6 @@ const userSignUp = expressAsyncHandler(
     async(req: Request, res: Response)=>{
         const { name, email, password } = req.body
 
-        console.log(req.body)
-        console.log(name, password)
-
         const user = await userModel.findOne({name})
 
         if(user){
